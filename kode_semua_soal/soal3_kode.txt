@@ -1,0 +1,63 @@
+// ===================== normal/soal3_normal.cpp =====================
+#include <iostream>
+using namespace std;
+
+bool adalah_prima(int n) {
+    if (n < 2) return false;          // 0, 1, dan negatif bukan prima
+    if (n < 4) return true;           // 2 dan 3 prima
+    if (n % 2 == 0) return false;     // genap > 2 bukan prima
+    for (long long i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    int n;
+    cout << "Masukkan bilangan: ";
+    cin >> n;
+    cout << n << (adalah_prima(n) ? " adalah bilangan prima\n"
+                                  : " bukan bilangan prima\n");
+    return 0;
+}
+
+// ===================== modular/prima.h =====================
+#ifndef PRIMA_H
+#define PRIMA_H
+
+// true jika n bilangan prima. Kompleksitas O(sqrt(n)).
+bool adalah_prima(int n);
+
+#endif
+
+// ===================== modular/prima.cpp =====================
+#include "prima.h"
+
+bool adalah_prima(int n) {
+    if (n < 2) return false;
+    if (n < 4) return true;
+    if (n % 2 == 0) return false;
+    for (long long i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+// ===================== modular/main.cpp =====================
+#include <iostream>
+#include "prima.h"
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int q;                       // jumlah pertanyaan
+    cin >> q;
+    while (q--) {
+        int n;
+        cin >> n;
+        cout << n << ": " << (adalah_prima(n) ? "true" : "false") << "\n";
+    }
+    return 0;
+}
